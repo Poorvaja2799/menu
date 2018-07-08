@@ -12,7 +12,6 @@
     <link href="{{url_for('static', filename ='css/style.css')}}" rel="stylesheet">
 </head>
 <body style="margin:0px">
-<img src ="{{url_for('static', filename ='img/aparajitha-logo.png')}}" style="margin:5px;" />
 <form action="/menus" method="POST">
     <div class="navbar">
     {%for one in Menu_list%}
