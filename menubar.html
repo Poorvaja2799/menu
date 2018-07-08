@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Setup</title>
+    <style>
+    #out {
+        float:right;
+        font-size: 16px;
+    }
+    </style>
+    <link href="{{url_for('static', filename ='css/style.css')}}" rel="stylesheet">
+</head>
+<body style="margin:0px">
+<img src ="{{url_for('static', filename ='img/aparajitha-logo.png')}}" style="margin:5px;" />
+<form action="/menus" method="POST">
+    <div class="navbar">
+    {%for one in Menu_list%}
+    {%if Cur_user['role_id'] == one['role_ID']%}
+    <div class="dropdown">
+    <button class="dropbtn">{{one['menu_name']}}</button>
+    <div class="dropdown-content">
+    {%for each in Sub_Menu_list%}
+    {%if Cur_user['role_id'] == each['role_ID']%}
+    {%if each['main_menu']==one['menu_name']%}
+        <a href="#">{{each['menu_name']}}</a>
+    {%endif%}
+    {%endif%}
+    {%endfor%}
+    </div>
+    </div>
+    {%endif%}
+    {%endfor%}
+    <a id="out" href="/userlogin">Log Out</a>
+    </div>
+</form>
+<script>
+var modal = document.getElementById('id01');
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+</body>
+</html>

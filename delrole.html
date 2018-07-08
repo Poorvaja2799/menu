@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Setup</title>
+    <link href="{{url_for('static', filename ='css/style.css')}}" rel="stylesheet">
+    <script src="{{url_for('static', filename='js/core.js')}}" type="text/javascript"></script>
+</head>
+<body>
+{% include 'navbar.html' %}
+{% if error %}
+    <center><p style="color:red" class=error><strong>Error:</strong>{{ error }}</p></center>
+{% endif %}
+{% if message %}
+    <center><p style="color:green" class=message><strong>Success:</strong>{{ message }}</p></center>
+{% endif %}
+<form action="/delrole" method="POST">
+    <table>
+        <tr>
+            <td>
+                <label for="roles">Role</label>
+            </td>
+            <td>
+                <input type="text" onkeypress="return onlyAlphanumeric(event,this);" name="role_name" list="roles">
+            </td>
+            <td>
+                <datalist id="roles">
+                    {%for role in Roles%}
+                         <option value="{{role['role']}}">
+                     {%endfor%}
+                </datalist>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button type="submit" name="Delete Role">DELETE</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

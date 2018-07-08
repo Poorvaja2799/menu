@@ -1,0 +1,32 @@
+<div class='sidenav'>
+    <a href="/menu">Menu Creation</a>
+    <a href="/addrole">Role Creation</a>
+    <a href="/role">Role Privileges</a>
+    <a href="/usersetup">User Setup</a>
+    <button class="dropdownnav-btn">Edit</button>
+    <div class="dropdownnav-container">
+        <a href="/edit">Edit Menus</a>
+        <a href="/roleedit">Edit Role Privileges</a>
+    </div>
+   <button class="dropdownnav-btn">Delete</button>
+    <div class="dropdownnav-container">
+        <a href="/delmenu">Delete Menus</a>
+        <a href="/delrole">Delete Roles</a>
+    </div>
+</div>
+<script>
+var dropdown = document.getElementsByClassName("dropdownnav-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+</script>

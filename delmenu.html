@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Setup</title>
+    <link href="{{url_for('static', filename ='css/style.css')}}" rel="stylesheet">
+    <script src="{{url_for('static', filename='js/core.js')}}" type="text/javascript"></script>
+</head>
+<body>
+{% include 'navbar.html' %}
+{% if error %}
+    <center><p style="color:red" class=error><strong>Error:</strong>{{ error }}</p></center>
+{% endif %}
+{% if message %}
+    <center><p style="color:green" class=message><strong>Success:</strong>{{ message }}</p></center>
+{% endif %}
+<form action="/delmenu" method="POST">
+    <table>
+        <tr>
+            <td>
+                <label for="menu_name">Menu Name</label>
+            </td>
+            <td>
+                <input type="text" list="menu_name" onkeypress="return onlyAlphabets(event,this);" name="menu_name">
+            </td>
+            <td>
+                <datalist id="menu_name">
+                    {%for menu in Menus%}
+                        <option value="{{menu['menu_name']}}">
+                    {%endfor%}
+                </datalist>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="if_main_menu">Parent Menu</label>
+            </td>
+            <td>
+                <input type="checkbox" id="if_main_menu" value="Main_menu" name="if_main_menu">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button type="submit" name="Delete Menu">DELETE</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

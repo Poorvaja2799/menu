@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Setup</title>
+    <link href="{{url_for('static', filename ='css/style.css')}}" rel="stylesheet">
+    <script src="{{url_for('static', filename='js/core.js')}}" type="text/javascript"></script>
+</head>
+<body>
+{% include 'navbar.html' %}
+{% if error %}
+    <center><p style="color:red" class=error><strong>Error:</strong>{{ error }}</p></center>
+{% endif %}
+{% if message %}
+    <center><p style="color:green" class=message><strong>Success:</strong>{{ message }}</p></center>
+{% endif %}
+<form action="/menu" method="POST">
+    <table>
+        <tr>
+            <td>
+                <label for="menu">Menu Name</label>
+            </td>
+            <td>
+                <input type="text" id="menu" onkeypress="return onlyAlphabets(event,this);" name="menu" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="if_main_menu">Parent Menu</label>
+            </td>
+            <td>
+                <input type="checkbox" onclick="main_menu_checked()" id="if_main_menu" value="Main_menu" name="if_main_menu" checked>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="main_menu">Parent Menu</label>
+            </td>
+            <td>
+                <input type="text" list="main_menus" onkeypress="return onlyAlphabets(event,this);"
+                       class="disable" name="main_menu" id="main_menu" disabled="disabled">
+            </td>
+            <td>
+                <datalist id="main_menus">
+                    {%for menu in Main_menus%}
+                        <option value="{{menu['menu_name']}}">
+                    {%endfor%}
+                </datalist>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Display Order</label>
+            </td>
+            <td>
+                <input type="number" id="order" name="order" required>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button type="submit" name="Create Menu">SUBMIT</button>
+            </td>
+        </tr>
+    </table>
+</form>
+<script>
+    var checkbox=document.getElementById('if_main_menu')
+    var elements = document.getElementsByClassName("disable");
+    function main_menu_checked() {
+    for(var i=0; i<elements.length; i++) {
+     if(checkbox.checked) {
+        elements[i].setAttribute("disabled","disabled");
+        } else {
+        elements[i].removeAttribute("disabled");
+        }
+    }
+    }
+</script>
+</body>
+</html>
